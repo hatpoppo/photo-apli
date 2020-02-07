@@ -9,8 +9,10 @@ export const actionsWithService = {
     return async (dispatch: any, getState: () => Store) => {
       await service
         .add(photo)
+        .then(response => response.json())
         .then(response => {
-          console.log(response);
+          console.log("addPhoto", JSON.stringify(response));
+          console.log("addPhoto", response);
         })
         .catch(err => {
           console.log(err);

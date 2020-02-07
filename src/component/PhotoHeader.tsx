@@ -6,7 +6,7 @@ import { actions, actionsWithService } from "../actions";
 import { connect } from "react-redux";
 
 interface PhotoHeaderProps {
-  addPhoto: (label: string, id: string) => void;
+  addPhoto: (label: any) => void;
   setFilter: (filter: FilterTypes) => void;
 }
 class PhotoHeader extends React.Component<PhotoHeaderProps, any> {
@@ -57,9 +57,10 @@ class PhotoHeader extends React.Component<PhotoHeaderProps, any> {
   _onClick = evt => {
     const el = this._myFile.current;
     if (el.files.length > 0) {
-      console.log("get file");
       let formData = new FormData();
       formData.append("photo", el.files[0]);
+      formData.append("name", el.files[0].name);
+      this.props.addPhoto(formData);
     } else {
       console.log("not file");
     }
@@ -67,8 +68,8 @@ class PhotoHeader extends React.Component<PhotoHeaderProps, any> {
 }
 const PhotoHeaderConnect = connect(
   state => ({}),
-  dispatch => ({
-    addPhoto: (label, id) => dispatch(actions.addPhoto(label, id)),
+  (dispatch: any) => ({
+    addPhoto: photo => dispatch(actionsWithService.addPhoto(photo)),
     setFilter: filster => dispatch(actions.setFilter(filster))
   })
 )(PhotoHeader);

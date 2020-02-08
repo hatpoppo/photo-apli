@@ -6,7 +6,7 @@ export const photoReducer = createReducer<Store["photo"]>(
   {},
   {
     addPhoto(state, action) {
-      state[action.id] = { label: action.label, completed: false };
+      state[action.id] = { label: action.label, kind: action.kind, image: action.image, completed: false };
     }
   }
 );

@@ -20,12 +20,12 @@ router.get("/", function(req, res) {
 });
 router.post("/", uploadDir.single("photo"), function(req, res) {
   readFile(req.file.path).then(data => {
-    console.log(data);
     models.Photos.create({
       title: req.body.title,
-      photo: data
+      photo: data,
+      kind: req.file.mimetype
     }).then(photo => {
-      res.json({ id: photo.id, title: photo.title, photo: photo.photo });
+      res.json(photo);
     });
   });
 });

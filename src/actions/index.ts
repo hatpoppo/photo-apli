@@ -11,8 +11,8 @@ export const actionsWithService = {
         .add(photo)
         .then(response => response.json())
         .then(response => {
-          console.log("addPhoto", JSON.stringify(response));
-          console.log("addPhoto", response);
+          console.log("addPhoto", response.id, " ", response.title);
+          console.log("image", response.photo);
         })
         .catch(err => {
           console.log(err);

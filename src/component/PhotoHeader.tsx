@@ -59,7 +59,7 @@ class PhotoHeader extends React.Component<PhotoHeaderProps, any> {
     if (el.files.length > 0) {
       let formData = new FormData();
       formData.append("photo", el.files[0]);
-      formData.append("name", el.files[0].name);
+      formData.append("title", this.state.labelInput);
       this.props.addPhoto(formData);
     } else {
       console.log("not file");

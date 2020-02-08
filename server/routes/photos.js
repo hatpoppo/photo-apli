@@ -4,20 +4,30 @@ var router = express.Router();
 const multer = require("multer");
 const path = require("path");
 
+const util = require("util");
+const fs = require("fs");
+var models = require("../../models");
+
 //uploadするディレクトリ
 const upDir = path.join(__dirname, "upload");
 //アップロードディレクトリ
 const uploadDir = multer({ dest: upDir });
+//readFileをpromisで利用
+const readFile = util.promisify(fs.readFile);
 /* GET home page. */
 router.get("/", function(req, res) {
   res.json("Hello");
 });
 router.post("/", uploadDir.single("photo"), function(req, res) {
-  console.log(req.body.name);
-  console.log(req.file.originalname);
-  console.log(req.file.path);
-  console.log(req.file.filename);
-  res.json(JSON.stringify({ name: req.body.name, sucsess: "succsess" }));
+  readFile(req.file.path).then(data => {
+    console.log(data);
+    models.Photos.create({
+      title: req.body.title,
+      photo: data
+    }).then(photo => {
+      res.json({ id: photo.id, title: photo.title, photo: photo.photo });
+    });
+  });
 });
 
 module.exports = router;

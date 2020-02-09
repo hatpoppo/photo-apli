@@ -11,7 +11,7 @@ export const actionsWithService = {
         .add(photo)
         .then(response => response.json())
         .then(response => {
-          dispatch(actions.addPhoto(response.title, response.id, response.kind, response.photo));
+          dispatch(actions.addPhoto(response.title, response.id, response.kind, response.base64));
         })
         .catch(err => {
           console.log(err);

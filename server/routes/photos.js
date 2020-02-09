@@ -25,7 +25,16 @@ router.post("/", uploadDir.single("photo"), function(req, res) {
       photo: data,
       kind: req.file.mimetype
     }).then(photo => {
-      res.json(photo);
+      console.log(photo.photo);
+      let obj = {};
+      obj.title = photo.title;
+      obj.id = photo.id;
+      obj.completed = photo.completed;
+      obj.kind = photo.kind;
+      if (photo.photo instanceof Buffer) {
+        obj.base64 = photo.photo.toString("base64");
+      }
+      res.json(obj);
     });
   });
 });

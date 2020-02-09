@@ -1,20 +1,23 @@
 import React from "react";
-import { FilterTypes } from "../store";
-import { Stack, Text, Pivot, PivotItem, TextField, PrimaryButton } from "office-ui-fabric-react";
-
-import { actions, actionsWithService } from "../actions";
+import { Store } from "../store";
+import { Stack } from "office-ui-fabric-react";
 import { connect } from "react-redux";
+import { PhotoListItem } from "./PhotoListItem";
 
 interface PhotoListProps {
-  addPhoto: (label: string, id: string) => void;
-  setFilter: (filter: FilterTypes) => void;
+  photos: Store["photos"];
 }
 const PhotoList = (props: PhotoListProps) => {
+  const { photos } = props;
+  const filterdPhotos = Object.keys(photos);
   return (
     <Stack>
-      <Stack></Stack>
+      {filterdPhotos.map(id => (
+        <PhotoListItem key={id} id={id} />
+      ))}
     </Stack>
   );
 };
-
-export { PhotoList };
+const ConnectedPhotoList = connect((state: Store) => ({ ...state }))(PhotoList);
+export { ConnectedPhotoList as PhotoList };
+// export { PhotoList };

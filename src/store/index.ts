@@ -8,7 +8,7 @@ export interface PhotoItem {
 }
 
 export interface Store {
-  photo: {
+  photos: {
     [id: string]: PhotoItem;
   };
   filter: FilterTypes;

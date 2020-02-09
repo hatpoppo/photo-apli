@@ -11,7 +11,7 @@ import { FilterTypes, Store } from "./store";
 import * as serviceWorker from "./serviceWorker";
 import { reducer } from "./reducer";
 
-const store = createStore(reducer, {}, composeWithDevTools(applyMiddleware(thunk)));
+const store = createStore(reducer, { photos: {}, filter: "all" }, composeWithDevTools(applyMiddleware(thunk)));
 initializeIcons();
 
 ReactDOM.render(

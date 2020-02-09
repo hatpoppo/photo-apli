@@ -2,11 +2,11 @@ import { Store } from "../store";
 import { combineReducers } from "redux";
 import { createReducer } from "@reduxjs/toolkit";
 
-export const photoReducer = createReducer<Store["photo"]>(
+export const photoReducer = createReducer<Store["photos"]>(
   {},
   {
     addPhoto(state, action) {
-      state[action.id] = { label: action.label, kind: action.kind, image: action.image, completed: false };
+      state[action.id] = { label: action.label, image: action.image, kind: action.kind, completed: false };
     }
   }
 );
@@ -18,6 +18,6 @@ export const filterReducer = createReducer<Store["filter"]>("all", {
 });
 
 export const reducer = combineReducers({
-  photo: photoReducer,
+  photos: photoReducer,
   filter: filterReducer
 });

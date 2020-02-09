@@ -1,4 +1,4 @@
-import { PhotoItem, Store } from "../store";
+import { PhotoItem } from "../store";
 const HOST = "http://localhost:4000";
 
 export const add = async (photo: any) => {
@@ -13,4 +13,12 @@ export const getAll = async () => {
     method: "get"
   });
   return response.json();
+};
+export const update = async (id: string, photo: PhotoItem) => {
+  const response = await fetch(`${HOST}/photos/${id}`, {
+    method: "put",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify(photo)
+  });
+  return response;
 };

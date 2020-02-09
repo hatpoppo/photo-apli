@@ -2,6 +2,8 @@ import { Store } from "../store";
 import * as service from "../service";
 export const actions = {
   addPhoto: (title: string, id: string, kind: string, image: any) => ({ type: "addPhoto", id, title, kind, image }),
+  complete: (id: string) => ({ type: "complete", id }),
+  update: () => ({ type: "update" }),
   setFilter: (filter: string) => ({ type: "setFilter", filter })
 };
 export const actionsWithService = {
@@ -12,6 +14,20 @@ export const actionsWithService = {
         .then(response => response.json())
         .then(response => {
           dispatch(actions.addPhoto(response.title, response.id, response.kind, response.base64));
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    };
+  },
+  complete: (id: string) => {
+    return async (dispatch: any, getState: () => Store) => {
+      dispatch(actions.complete(id));
+      await service
+        .update(id, getState().photos[id])
+        .then(response => response.json())
+        .then(response => {
+          console.log(response);
         })
         .catch(err => {
           console.log(err);

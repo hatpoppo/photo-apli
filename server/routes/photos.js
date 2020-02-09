@@ -43,13 +43,27 @@ router.post("/", uploadDir.single("photo"), function(req, res) {
       let obj = {};
       obj.title = photo.title;
       obj.id = photo.id;
-      obj.completed = photo.completed;
+      obj.complete = photo.complete;
       obj.kind = photo.kind;
       if (photo.photo instanceof Buffer) {
         obj.base64 = photo.photo.toString("base64");
       }
       res.json(obj);
     });
+  });
+});
+router.put("/:id", function(req, res, next) {
+  console.log(req.body.complete);
+  models.Photos.update(
+    {
+      title: req.body.title,
+      complete: req.body.complete
+    },
+    {
+      where: { id: req.params.id }
+    }
+  ).then(photo => {
+    res.json(photo);
   });
 });
 

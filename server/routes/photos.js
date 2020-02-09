@@ -17,17 +17,16 @@ const readFile = util.promisify(fs.readFile);
 /* GET home page. */
 router.get("/", function(req, res, next) {
   models.Photos.findAll({}).then(photos => {
-    let obj = [];
+    let obj = {};
     photos.forEach(photo => {
-      let tmp = {};
-      tmp.title = photo.title;
-      tmp.id = photo.id;
-      tmp.kind = photo.kind;
-      tmp.complete = photo.complete;
+      let rec = {};
+      rec.title = photo.title;
+      rec.kind = photo.kind;
+      rec.complete = photo.complete;
       if (photo.photo instanceof Buffer) {
-        tmp.image = photo.photo.toString("base64");
+        rec.image = photo.photo.toString("base64");
       }
-      obj.push(tmp);
+      obj[photo.id] = rec;
     });
     res.json(obj);
   });

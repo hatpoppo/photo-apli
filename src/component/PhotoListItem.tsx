@@ -24,10 +24,10 @@ class PhotoListItem extends React.Component<PhotoListItemProps, any> {
     return (
       <Stack horizontal horizontalAlign="space-between">
         <Stack.Item align="center" styles={stackItemStyles}>
-          <Checkbox label={photos[id].label} checked={photos[id].completed} />
+          <Checkbox label={photos[id].title} checked={photos[id].complete} />
         </Stack.Item>
         <Stack.Item styles={stackItemStyles}>
-          <Image alt={photos[id].label} src={"data:" + photos[id].kind + ";base64," + photos[id].image} width={100} />
+          <Image alt={photos[id].title} src={"data:" + photos[id].kind + ";base64," + photos[id].image} width={100} />
         </Stack.Item>
       </Stack>
     );

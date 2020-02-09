@@ -10,16 +10,23 @@ import thunk from "redux-thunk";
 import { FilterTypes, Store } from "./store";
 import * as serviceWorker from "./serviceWorker";
 import { reducer } from "./reducer";
+import * as service from "./service";
 
-const store = createStore(reducer, { photos: {}, filter: "all" }, composeWithDevTools(applyMiddleware(thunk)));
-initializeIcons();
+(async () => {
+  const preloadStore: Store = {
+    photos: (await service.getAll()) as Store["photos"],
+    filter: "all" as FilterTypes
+  };
+  const store = createStore(reducer, preloadStore, composeWithDevTools(applyMiddleware(thunk)));
+  initializeIcons();
 
-ReactDOM.render(
-  <Provider store={store}>
-    <PhotoApp />
-  </Provider>,
-  document.getElementById("root")
-);
+  ReactDOM.render(
+    <Provider store={store}>
+      <PhotoApp />
+    </Provider>,
+    document.getElementById("root")
+  );
+})();
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

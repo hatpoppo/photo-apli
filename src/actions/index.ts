@@ -1,7 +1,7 @@
 import { Store } from "../store";
 import * as service from "../service";
 export const actions = {
-  addPhoto: (label: string, id: string, kind: string, image: any) => ({ type: "addPhoto", id, label, kind, image }),
+  addPhoto: (title: string, id: string, kind: string, image: any) => ({ type: "addPhoto", id, title, kind, image }),
   setFilter: (filter: string) => ({ type: "setFilter", filter })
 };
 export const actionsWithService = {

@@ -8,3 +8,9 @@ export const add = async (photo: any) => {
   });
   return response;
 };
+export const getAll = async () => {
+  const response = await fetch(`${HOST}/photos`, {
+    method: "get"
+  });
+  return response.json();
+};

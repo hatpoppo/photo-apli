@@ -6,7 +6,7 @@ import { actions, actionsWithService } from "../actions";
 import { connect } from "react-redux";
 
 interface PhotoFooterProps {
-  addPhoto: (label: string, id: string) => void;
+  addPhoto: (title: string, id: string) => void;
   setFilter: (filter: FilterTypes) => void;
 }
 const PhotoFooter = (props: PhotoFooterProps) => {

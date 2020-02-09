@@ -1,12 +1,12 @@
 import React from "react";
 import { FilterTypes } from "../store";
-import { Stack, Text, Pivot, PivotItem, TextField, PrimaryButton, Label, ILabel, IButton } from "office-ui-fabric-react";
+import { Stack, Text, Pivot, PivotItem, TextField, PrimaryButton } from "office-ui-fabric-react";
 
 import { actions, actionsWithService } from "../actions";
 import { connect } from "react-redux";
 
 interface PhotoHeaderProps {
-  addPhoto: (label: any) => void;
+  addPhoto: (title: any) => void;
   setFilter: (filter: FilterTypes) => void;
 }
 class PhotoHeader extends React.Component<PhotoHeaderProps, any> {

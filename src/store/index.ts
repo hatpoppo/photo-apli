@@ -1,10 +1,10 @@
 export type FilterTypes = "all" | "active" | "completed";
 
 export interface PhotoItem {
-  label: string;
+  title: string;
   image: any;
   kind: string;
-  completed: boolean;
+  complete: boolean;
 }
 
 export interface Store {

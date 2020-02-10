@@ -22,3 +22,9 @@ export const update = async (id: string, photo: PhotoItem) => {
   });
   return response;
 };
+export const remove = async (id: string) => {
+  const response = await fetch(`${HOST}/photos/${id}`, {
+    method: "delete"
+  });
+  return response;
+};

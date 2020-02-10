@@ -53,7 +53,6 @@ router.post("/", uploadDir.single("photo"), function(req, res) {
   });
 });
 router.put("/:id", function(req, res, next) {
-  console.log(req.body.complete);
   models.Photos.update(
     {
       title: req.body.title,
@@ -64,6 +63,11 @@ router.put("/:id", function(req, res, next) {
     }
   ).then(photo => {
     res.json(photo);
+  });
+});
+router.delete("/:id", function(req, res, next) {
+  models.Photos.destroy({
+    where: { id: req.params.id }
   });
 });
 

@@ -11,6 +11,9 @@ export const photoReducer = createReducer<Store["photos"]>(
 
     complete(state, action) {
       state[action.id].complete = !state[action.id].complete;
+    },
+    remove(state, action) {
+      delete state[action.id];
     }
   }
 );

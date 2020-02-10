@@ -1,20 +1,27 @@
 import React from "react";
-import { FilterTypes } from "../store";
-import { Stack, Text, Pivot, PivotItem, TextField, PrimaryButton } from "office-ui-fabric-react";
+import { Store } from "../store";
+import { Stack, Text } from "office-ui-fabric-react";
 
-import { actions, actionsWithService } from "../actions";
 import { connect } from "react-redux";
 
 interface PhotoFooterProps {
-  addPhoto: (title: string, id: string) => void;
-  setFilter: (filter: FilterTypes) => void;
+  photos: Store["photos"];
 }
 const PhotoFooter = (props: PhotoFooterProps) => {
+  const { photos } = props;
+  const itemCount = Object.keys(photos).filter(id => !photos[id].complete).length;
+  const itemAllCount = Object.keys(photos).length;
   return (
     <Stack>
-      <Stack></Stack>
+      <Text>
+        {itemCount} item{itemCount <= 1 ? "" : "s"} / {itemAllCount}
+      </Text>
     </Stack>
   );
 };
+const ConnectedPhotoFooter = connect(
+  (state: Store) => ({ photos: state.photos }),
+  dispatch => ({})
+)(PhotoFooter);
 
-export { PhotoFooter };
+export { ConnectedPhotoFooter as PhotoFooter };

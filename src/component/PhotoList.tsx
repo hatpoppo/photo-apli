@@ -1,15 +1,18 @@
 import React from "react";
-import { Store } from "../store";
+import { Store, FilterTypes } from "../store";
 import { Stack } from "office-ui-fabric-react";
 import { connect } from "react-redux";
 import { PhotoListItem } from "./PhotoListItem";
 
 interface PhotoListProps {
   photos: Store["photos"];
+  filter: FilterTypes;
 }
 const PhotoList = (props: PhotoListProps) => {
-  const { photos } = props;
-  const filterdPhotos = Object.keys(photos);
+  const { photos, filter } = props;
+  const filterdPhotos = Object.keys(photos).filter(id => {
+    return filter === "all" || (filter === "completed" && photos[id].complete) || (filter === "active" && !photos[id].complete);
+  });
   return (
     <Stack>
       {filterdPhotos.map(id => (

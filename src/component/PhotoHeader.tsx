@@ -36,6 +36,11 @@ class PhotoHeader extends React.Component<PhotoHeaderProps, any> {
         </Stack>
         <PrimaryButton onClick={this._onClick} text="追加"></PrimaryButton>
         <input type="file" ref={this._myFile} onChange={this._onPhotoChange} />
+        <Pivot onLinkClick={this._onFilter}>
+          <PivotItem headerText="all"></PivotItem>
+          <PivotItem headerText="completed"></PivotItem>
+          <PivotItem headerText="active"></PivotItem>
+        </Pivot>
       </Stack>
     );
   }
@@ -64,6 +69,10 @@ class PhotoHeader extends React.Component<PhotoHeaderProps, any> {
     } else {
       console.log("not file");
     }
+  };
+  _onFilter = item => {
+    console.log(item.props.headerText);
+    this.props.setFilter(item.props.headerText as FilterTypes);
   };
 }
 const PhotoHeaderConnect = connect(

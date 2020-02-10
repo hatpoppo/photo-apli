@@ -3,7 +3,7 @@ import * as service from "../service";
 export const actions = {
   addPhoto: (title: string, id: string, kind: string, image: any) => ({ type: "addPhoto", id, title, kind, image }),
   complete: (id: string) => ({ type: "complete", id }),
-  update: () => ({ type: "update" }),
+  edit: (id: string, title: string) => ({ type: "edit", id, title }),
   remove: (id: string) => ({ type: "remove", id }),
   setFilter: (filter: string) => ({ type: "setFilter", filter })
 };
@@ -40,6 +40,20 @@ export const actionsWithService = {
       dispatch(actions.remove(id));
       await service
         .remove(id)
+        .then(response => response.json())
+        .then(response => {
+          console.log(response);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    };
+  },
+  edit: (id: string, title: string) => {
+    return async (dispatch: any, getState: () => Store) => {
+      dispatch(actions.edit(id, title));
+      await service
+        .update(id, getState().photos[id])
         .then(response => response.json())
         .then(response => {
           console.log(response);

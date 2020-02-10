@@ -14,6 +14,9 @@ export const photoReducer = createReducer<Store["photos"]>(
     },
     remove(state, action) {
       delete state[action.id];
+    },
+    edit(state, action) {
+      state[action.id].title = action.title;
     }
   }
 );

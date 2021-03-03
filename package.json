@@ -21,7 +21,7 @@
     "office-ui-fabric-react": "^7.89.0",
     "pg": "^7.18.1",
     "pg-hstore": "^2.3.3",
-    "pug": "^2.0.4",
+    "pug": "^3.0.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-redux": "^7.1.3",
